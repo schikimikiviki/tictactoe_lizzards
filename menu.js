@@ -1,3 +1,6 @@
+const prompt = require("prompt-sync")();
+
+
 module.exports = {
     getMenuOption: function() {
         console.log("Choose one of the following options:", "1. Human vs Human", "2. Random AI vs Random AI", "3. Human vs Random AI", "4. Human vs Unbeatable AI")
@@ -17,20 +20,26 @@ module.exports = {
 // run this function to test whether you have correctly implemented the other function
 function checkOptions()
 {
-    let option = getMenuOption();
+    let option = module.exports.getMenuOption();
     option = prompt("What option would you like to select?")
 
     if (option === "1") {
         console.log("1")
+        //debug typeof option
+        console.log(typeof option)
         return option
     } else if (option === "2") {
+        //debug typeof option
         console.log("2")
         return option
     } else if (option === "3") {
+        //debug typeof option
         console.log("3")
         return option
     } else if (option === "4") {
+        //debug typeof option
         console.log("4")
+        return option
     } else {
         console.log("Option you've selected is invalid, please try it again")
         option = prompt("What option would you like to select? 1-4")
