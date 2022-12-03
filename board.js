@@ -38,21 +38,38 @@ module.exports = {
 	},
 
 	getWinningPlayer: function (board) {
+		let winCombinations = [
+			[A1, B1, C1],
+			[A2, B2, C2],
+			[A3, B3, C3],
+			[A1, A2, A3],
+			[B1, B2, B3],
+			[C1, C2, C3],
+			[A1, B2, C3],
+			[C1, B2, A3],
+		];
+
+		let A1 = board[0][0];
+		let A2 = board[0][1];
+		let A3 = board[0][2];
+		let B1 = board[1][0];
+		let B2 = board[1][1];
+		let B3 = board[1][2];
+		let C1 = board[2][0];
+		let C2 = board[2][1];
+		let C3 = board[2][2];
+
 		let winner;
 
-		if (
-			(board[0][0] && board[0][1] && board[0][2]) ||
-			(board[1][0] && board[1][1] && board[1][2]) ||
-			(board[2][0] && board[2][1] && board[2][2]) ||
-			(board[0][0] && board[1][0] && board[2][0]) ||
-			(board[0][1] && board[1][1] && board[2][1]) ||
-			(board[0][2] && board[1][2] && board[2][2]) ||
-			(board[0][0] && board[1][1] && board[2][2]) ||
-			(board[2][0] && board[1][1] && board[0][2])
-		) {
+		if (board.includes(winCombinations)) {
+			winner = `X`;
+			return winner;
+		} else if (board.includes(winCombinations)) {
+			winner = `O`;
 			return winner;
 		} else {
-			console.log(`No one won!`);
+			console.log(``);
+			return;
 		}
 
 		/*
@@ -70,7 +87,7 @@ function checkBoards() {
 	board = [
 		["X", "O", "."],
 		["X", "O", "."],
-		["0", "X", "."],
+		["O", "X", "."],
 	];
 
 	console.log(`Should give out:"
