@@ -2,6 +2,42 @@ const prompt = require("prompt-sync")();
 
 module.exports = {
   getPlayerMove: function (board, current_player) {
+        let abc = prompt("Select a coordinate, it begins with a letter: A, B or C")
+        let move = "";
+        let playerMoves = [""];
+        let playerMovesO = [""];
+        let playerMovesX = [""];
+        if (abc === 'a' || abc === 'A' || abc === 'b' || abc === 'B' || abc === 'c' || abc === 'C') {
+          console.log("Your selection is: ", abc)
+          move = move + abc
+          // debugging move selection
+          console.log(move)
+        } else if (abc === 'quit' || abc === 'Q' || abc === 'q') {
+          console.log("Good bye, see you later!")
+          process.exit();
+        } else {
+          console.log("Your selection was incorrect, try it again")
+          abc = prompt("Select a coordinate, it begins with a letter: A, B, or C")
+        }
+
+        let numeroCoordinate = prompt("Select the second part of your coordinate: 1, 2 or 3")
+        if (numeroCoordinate === "1" || numeroCoordinate === "2" || numeroCoordinate === "3") {
+          console.log("Your selection was: ", numeroCoordinate)
+          move = move + numeroCoordinate
+          // debugging move selection
+          console.log(move)
+        } else if (abc === 'quit' || abc === 'Q' || abc === 'q') {
+          console.log("Good bye, see you later!")
+          process.exit();
+        } else {
+          console.log("Your selection was incorrect, try it again")
+          numeroCoordinate = prompt("Select the second part of your coordinate: 1, 2 or 3")
+        }
+
+        playerMoves = playerMoves.push(move)
+        return playerMoves
+        // debugging playermoves
+        console.log(playerMoves)
     /*
         Should return the read coordinates for the tic tac toe board from the terminal.
         The coordinates should be in the format  letter, number where the letter is 

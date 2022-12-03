@@ -22,6 +22,21 @@ function main() {
         */
     let currentPlayer = "X";
 
+/*if (playerMovesX.length === 0 && playerMovesO.length === 0 && option === "1") {
+  console.log("Who'll start the game? Choose a number of 1-10. Those, who tipped it correctly or had the nearest tip, can start the game.")
+  console.log("Who won? Who will start, X or O?")
+      let startPlayer = prompt("Who has won the game? Type in who will start, X or O? Was it a draw? Than type D in!")
+      if (startPlayer === "X" || startPlayer === "x") {
+        console.log("O, do your first step.")
+        currentPlayer === "X"
+      } else if (startPlayer === "o" || startPlayer === "O") {
+        console.log("O, do your first step.")
+        currentPlayer === "O"
+      } else if (startPlayer === "d" || startPlayer === "D") {
+        startPlayer = prompt("Who has won the game? Type in who will start, X or O? Was it a draw? Than type D in!")
+      }
+    }
+
     /* TODO
 
         based on the value of the variables `game_mode` and `currentPlayer` 

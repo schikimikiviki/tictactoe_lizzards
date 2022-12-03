@@ -31,11 +31,13 @@ function checkOptions()
         return option
     } else if (option === "4") {
         console.log("4")
-        return option
     } else {
         console.log("Option you've selected is invalid, please try it again")
         option = prompt("What option would you like to select? 1-4")
     }
-    console.log("If the user selected 1, it should print 1");
-    console.log(option);
+    //console.log("If the user selected 1, it should print 1");
+    //console.log(option);
+
 }
+
+checkOptions();
