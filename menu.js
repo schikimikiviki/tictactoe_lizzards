@@ -1,5 +1,6 @@
 module.exports = {
     getMenuOption: function() {
+        console.log("Choose one of the following options:", "1. Human vs Human", "2. Random AI vs Random AI", "3. Human vs Random AI", "4. Human vs Unbeatable AI")
         /*
         Should print a menu with the following options:
         1. Human vs Human
@@ -17,6 +18,24 @@ module.exports = {
 function checkOptions()
 {
     let option = getMenuOption();
+    option = prompt("What option would you like to select?")
+
+    if (option === "1") {
+        console.log("1")
+        return option
+    } else if (option === "2") {
+        console.log("2")
+        return option
+    } else if (option === "3") {
+        console.log("3")
+        return option
+    } else if (option === "4") {
+        console.log("4")
+        return option
+    } else {
+        console.log("Option you've selected is invalid, please try it again")
+        option = prompt("What option would you like to select? 1-4")
+    }
     console.log("If the user selected 1, it should print 1");
     console.log(option);
 }
