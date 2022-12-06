@@ -38,44 +38,36 @@ module.exports = {
 	},
 
 	getWinningPlayer: function (board) {
-		let winCombinations = [
-			[A1, B1, C1],
-			[A2, B2, C2],
-			[A3, B3, C3],
-			[A1, A2, A3],
-			[B1, B2, B3],
-			[C1, C2, C3],
-			[A1, B2, C3],
-			[C1, B2, A3],
+		const winningConditions = [
+			[0, 1, 2],
+			[3, 4, 5],
+			[6, 7, 8],
+			[0, 3, 6],
+			[1, 4, 7],
+			[2, 5, 8],
+			[0, 4, 8],
+			[2, 4, 6],
 		];
 
-		let A1 = board[0][0];
-		let A2 = board[0][1];
-		let A3 = board[0][2];
-		let B1 = board[1][0];
-		let B2 = board[1][1];
-		let B3 = board[1][2];
-		let C1 = board[2][0];
-		let C2 = board[2][1];
-		let C3 = board[2][2];
+		let roundWon = false;
+		for (let i = 0; i <= 7; i++) {
+			const winCondition = winningConditions[i];
+			let a = gameState[winCondition[0]];
+			let b = gameState[winCondition[1]];
+			let c = gameState[winCondition[2]];
+			if (a === "" || b === "" || c === "") {
+				continue;
+			}
+			if (a === b && b === c) {
+				roundWon = true;
+				break;
+			}
 
-		let winner;
-
-		if (board.includes(winCombinations)) {
-			winner = `X`;
-			return winner;
-		} else if (board.includes(winCombinations)) {
-			winner = `O`;
-			return winner;
-		} else {
-			console.log(``);
-			return;
-		}
-
-		/*
+			/*
       Should return the player that wins based on the tic tac toe rules.
       If no player has won, than "None" is returned.
       */
+		}
 	},
 };
 
