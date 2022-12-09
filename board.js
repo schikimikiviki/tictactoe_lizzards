@@ -1,10 +1,16 @@
 module.exports = {
 	getEmptyBoard: function () {
-		let emptyboard = [
-			[".", ".", "."],
-			[".", ".", "."],
-			[".", ".", "."],
-		];
+		let emptyboard = {
+			1: " ",
+			2: " ",
+			3: " ",
+			4: " ",
+			5: " ",
+			6: " ",
+			7: " ",
+			8: " ",
+			9: " ",
+		};
 
 		return emptyboard;
 	},
@@ -38,44 +44,42 @@ module.exports = {
 	},
 
 	getWinningPlayer: function (board) {
-		let winCombinations = [
-			[A1, B1, C1],
-			[A2, B2, C2],
-			[A3, B3, C3],
-			[A1, A2, A3],
-			[B1, B2, B3],
-			[C1, C2, C3],
-			[A1, B2, C3],
-			[C1, B2, A3],
+		var winCombinations = [
+			[1, 2, 3],
+			[4, 5, 6],
+			[7, 8, 9],
+			[1, 4, 7],
+			[2, 5, 8],
+			[3, 6, 9],
+			[1, 5, 9],
+			[3, 5, 7],
 		];
 
-		let A1 = board[0][0];
-		let A2 = board[0][1];
-		let A3 = board[0][2];
-		let B1 = board[1][0];
-		let B2 = board[1][1];
-		let B3 = board[1][2];
-		let C1 = board[2][0];
-		let C2 = board[2][1];
-		let C3 = board[2][2];
+		let playerX = `X`;
+		let playerO = `O`;
+		let winningplayer;
 
-		let winner;
+		for (var i = 0; i < winCombinations.length; i++) {
+			var markCountX = 0;
+			var markCountO = 0;
 
-		if (board.includes(winCombinations)) {
-			winner = `X`;
-			return winner;
-		} else if (board.includes(winCombinations)) {
-			winner = `O`;
-			return winner;
-		} else {
-			console.log(``);
-			return;
+			for (var j = 0; j < winCombinations[i].length; j++) {
+				if (board[winCombinations[i][j]] === playerX) {
+					markCountX++;
+
+					if (markCountX === 3) {
+						winningplayer = `X`;
+					}
+				} else if (board[winCombinations[i][j]] === playerO) {
+					markCountO++;
+					if (markCountO === 3) {
+						winningplayer = `O`;
+					}
+				}
+			}
 		}
-
-		/*
-      Should return the player that wins based on the tic tac toe rules.
-      If no player has won, than "None" is returned.
-      */
+		console.log(winningplayer);
+		return winningplayer;
 	},
 };
 
