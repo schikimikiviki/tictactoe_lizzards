@@ -32,7 +32,7 @@ let playerTwo = ""
 
 function startJourney() {
   if (modeSelection === 1 || modeSelection === 2 || modeSelection === 4) {
-    console.log("You selected the Human vs Human mode, in this case, you should know which player will start. Let me know, what is the name of Player 1 with X")
+    console.log("You selected the Human vs Human mode, in this case, we need 2 players. Let me know, what is the name of Player 1 with X")
     playerOne = prompt("What is your name, Player 1? You will be the X, not forget it!")
       if (prompt.length > 0) {
         console.log(`${playerOne} is our first player`)
