@@ -126,3 +126,119 @@ checkScoreAndStarter ();
 
 console.log(startingPlayer)
 console.log(`Player 1 with Symbol X is ${playerOne} and Player 2 with Symbol O is ${playerTwo} and Player ${startingPlayer} will start the game!`)
+
+var defaultConfig = {
+  player1:{
+      title: playerOne,
+      symbol: "X"
+  },
+  player2:{
+      title: playerTwo,
+      symbol: "O"
+  }
+};
+
+function drawBoard(round, board){
+    console.group(`Score after round ${round}`);
+    console.log(" ");
+    console.log("---1---2---3---")
+    console.log("---------------")
+    console.log('A ' + (board["A1"] || '. ') + " | " + (board["A2"] || ' . ') + " | " + (board["A3"] || ' . '));
+    console.log("---------------");
+    console.log('B ' + (board["B1"] || '. ') + " | " + (board["B2"] || ' . ') + " | " + (board["B3"] || ' . '));
+    console.log("---------------");
+    console.log('C ' + (board["C1"] || '. ') + " | " + (board["C2"] || ' . ') + " | " + (board["C3"] || ' . '));
+    console.log(" ");
+    console.groupEnd();
+};
+
+function solutions(board) {
+  return false
+      // horizontal
+      || (board["C1"] && (board["C1"] == board["C2"] && board["C1"] == board["C3"]))
+      || (board["B1"] && (board["B1"] == board["B2"] && board["B1"] == board["B3"]))
+      || (board["A1"] && (board["A1"] == board["A2"] && board["A1"] == board["A3"]))
+      // vertical
+      || (board["C1"] && (board["C1"] == board["B1"] && board["C1"] == board["A1"]))
+      || (board["C2"] && (board["C2"] == board["B2"] && board["C2"] == board["A2"]))
+      || (board["C3"] && (board["C3"] == board["B3"] && board["C3"] == board["A3"]))
+      // diagonal
+      || (board["C1"] && (board["C1"] == board["B2"] && board["C1"] == board["A3"]))
+      || (board["C3"] && (board["C3"] == board["B2"] && board["C3"] == board["A1"]));
+};
+
+function ttt(config){
+  config = Object.assign(defaultConfig, config || {});
+  let gameOn = true;
+  let player1Move, round, computer, board, ask, currentPlayer, opponentPlayer;
+
+  while (gameOn === true){
+      // init new game
+      round = 0
+      if (startingPlayer == "X") {
+        player1Move = true
+      } else {
+        player1Move = false
+      }
+      board = {
+          "C1" : null,
+          "C2" : null,
+          "C3" : null,
+          "B1" : null,
+          "B2" : null,
+          "B3" : null,
+          "A1" : null,
+          "A2" : null,
+          "A3" : null
+      };
+      if (modeSelection == "2") {
+        computer = true
+      } else {
+        computer = false
+      }
+      drawBoard(round++, board);
+      // for loop for game logic
+      for (var i = 0 ; i < 9; i++){
+          if (solutions(board)){
+              console.log(`%c${currentPlayer.title} )(${currentPlayer.symbol}) wins!`, 'font-size: x-large');
+              gameOn = false;
+              break;
+           }
+
+          currentPlayer = config.player1;
+          opponentPlayer = config.player2;
+          if(!player1Move)
+              currentPlayer = config.player2;
+              opponentPlayer = config.player1;
+
+          ask = undefined;
+          while(board[ask] !== null || ask === undefined){
+              if(player1Move === false && computer === true){
+                  ask = pc_move(board, currentPlayer.symbol, opponentPlayer.symbol);
+              } else {
+                  ask = prompt(`${currentPlayer.title} (${currentPlayer.symbol}) where would you like to go (A-C 1-3)? (type "exit" to leave)`);
+                  if(ask == 'exit') {
+                      gameOn = false;
+                      break;
+                  }
+              }
+          }
+          if(gameOn == false) {
+              break;
+          }
+
+          board[ask] = currentPlayer.symbol;
+          player1Move = !player1Move;
+          drawBoard(round++, board);
+      }
+      if(gameOn === true) {
+          console.log("%cTie Game!", "font-size: x-large");
+          gameOn = false;
+      }
+      if(ask !== 'exit' && prompt("Play again? (YES/no)") !== "no"){
+          gameOn = true;
+      }
+  }
+}
+
+ttt();
