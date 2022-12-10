@@ -3,7 +3,8 @@ const prompt = require("prompt-sync")();
 let modeSelection = 0
 
 function selectLevel() {
-  modeSelection = prompt("Please select the wanted mode to play (1-4) \n 1. Human vs Human \n 2. AI vs Human \n 3. AI vs AI /accidentaly not finished \n 4. Unbeatable AI vs Human /accidentaly not finished")
+  console.log("Mods included: \n 1. Human vs Human \n 2. AI vs Human \n 3. AI vs AI /coming soon \n 4. Unbeatable AI vs Human /coming soon")
+  modeSelection = prompt("Please select the wanted mode to play (1-4)")
 
   if (modeSelection === "1") {
     modeSelection = 1
@@ -66,11 +67,11 @@ let headOrTail = ""
 function selection2() {
 console.log(`We will decide the starting player with a coin toss, also ${playerOne} you should select: Head or Tail?`)
 headOrTail = prompt("Head - 1 or Tail - 2?")
-  if (prompt == "1") {
-  console.log(`Your selection was ${headOrTail}`)
+  if (headOrTail == "1") {
+  console.log(`Your selection was HEAD`)
   return headOrTail
-  } else if (prompt == "2") {
-  console.log(`Your selection was ${headOrTail}`)
+  } else if (headOrTail == "2") {
+  console.log(`Your selection was TAIL`)
   return headOrTail
   }
 }
@@ -79,6 +80,64 @@ if (modeSelection == 1 || modeSelection == 2) {
 selection2();
 }
 
+function exciteD() {
+let answer = prompt("")
+  if (answer == "yes") {
+    console.log("Me too...")
+  } else {
+    console.log("Why not?")
+    let answer2 = prompt("Describe your feelings, why aren't you excited as me?")
+  }
+}
+
+function angrY() {
+  let answer = prompt("")
+    if (answer == "yes") {
+      console.log("Me too...")
+    } else {
+      console.log("Why not?")
+      let answer2 = prompt("Describe your feelings, why aren't you excited as me?")
+    }
+  }
+
+  function funnyPart() {
+  console.log(".")
+  console.log("..")
+  console.log("...")
+  console.log("....")
+  console.log(".....")
+  console.log("Let me show you the result of the coin toss...")
+  console.log(".....")
+  console.log("....")
+  console.log("...")
+  console.log("..")
+  console.log(".")
+  console.log("Are you already excited? yes or no?")
+  exciteD();
+  console.log(".")
+  console.log("..")
+  console.log("...")
+  console.log("....")
+  console.log(".....")
+  console.log("The result is...")
+  console.log(".....")
+  console.log("Wait...")
+  console.log(".....")
+  console.log("Loading")
+  console.log("[      ]")
+  console.log("[-     ]")
+  console.log("[--    ]")
+  console.log("[--    ]")
+  console.log("[--    ]")
+  console.log("[--    ]")
+  console.log("Loading is taking little bit more time than usual, sorry for inconvenience. Are you angry?")
+  angrY();
+  console.log("Just kidding, I already know the result")
+  console.log("[------]")
+  console.log("Which is....")
+  }
+  funnyPart();
+
 let ergebnis = ""
 
 function whoWillStart() {
@@ -86,11 +145,11 @@ var prob1 = Math.floor(Math.random() * 2) +1;
 var prob2 = Math.floor(Math.random() * 2) +1;
 if( prob1 === prob2) {
   ergebnis = "Tail"
-  console.log('You Got TAIL');
+  console.log('Result: TAIL');
   return ergebnis
 } else {
   ergebnis = "Head"
-  console.log('You Got HEAD');
+  console.log('Result: HEAD');
   return ergebnis
 }
 }
@@ -102,9 +161,11 @@ whoWillStart();
 function checkScoreAndStarter() {
 if (ergebnis == "Tail" && headOrTail == "2" || ergebnis == "Head" && headOrTail == "1") {
   startingPlayer = "X"
+  console.log(`You won!!!! You can start the game!`)
   return startingPlayer
 } else {
   startingPlayer = "O"
+  console.log(`You lost!!!! Loooooser, opponent will start the game. HAHAAHAHAHAHA!`)
   return startingPlayer
 }
 }
@@ -237,24 +298,33 @@ function ttt(config){
               if(player1Move === false && computer === true){
                   ask = pc_move(board, currentPlayer.symbol, opponentPlayer.symbol);
               } else {
-                  ask = prompt(`${currentPlayer.title} (${currentPlayer.symbol}) where would you like to go (A-C 1-3)? (type "exit" to leave)`);
+                  ask = prompt(`${currentPlayer.title} (${currentPlayer.symbol}) where would you like to go A-C1-3? (as example: A1) (type "exit" to leave)`);
                   if (ask === "C1") {
+                    console.log(`AI selected: C1`)
                     ask = "1"
                   } else if (ask === "C2") {
+                    console.log(`AI selected: C2`)
                     ask = "2"
                   } else if (ask === "C3") {
+                    console.log(`AI selected: C3`)
                     ask = "3"
                   } else if (ask === "B1") {
+                    console.log(`AI selected: B1`)
                     ask = "4"
                   } else if (ask === "B2") {
+                    console.log(`AI selected: B2`)
                     ask = "5"
                   } else if (ask === "B3") {
+                    console.log(`AI selected: B3`)
                     ask = "6"
                   } else if (ask === "A1") {
+                    console.log(`AI selected: A1`)
                     ask = "7"
                   } else if (ask === "A2") {
+                    console.log(`AI selected: A2`)
                     ask = "8"
                   } else if (ask === "A3") {
+                    console.log(`AI selected: A3`)
                     ask = "9"
                   } else if(ask == 'exit') {
                       gameOn = false;
