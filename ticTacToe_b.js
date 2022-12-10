@@ -3,11 +3,7 @@ const prompt = require("prompt-sync")();
 let modeSelection = 0
 
 function selectLevel() {
-  modeSelection = prompt("Please select the wanted mode to play (1-4)" +
-  "1. Human vs Human" +
-                            "2. AI vs Human" +
-                            "3. AI vs AI" +
-                            "4. Unbeatable AI vs Human")
+  modeSelection = prompt("Please select the wanted mode to play (1-4) \n 1. Human vs Human \n 2. AI vs Human \n 3. AI vs AI /accidentaly not finished \n 4. Unbeatable AI vs Human /accidentaly not finished")
 
   if (modeSelection === "1") {
     modeSelection = 1
@@ -24,17 +20,11 @@ function selectLevel() {
   } else if (modeSelection == "Quit" || modeSelection == "quit") {
     process.exit();
   } else {
-    console.log("The selected mod didn't exists, please try it again.")
-    modeSelection = prompt("Please select the wanted mode to play (1-4)" +
-    "1. Human vs Human" +
-                              "2. AI vs Human" +
-                              "3. AI vs AI" +
-                              "4. Unbeatable AI vs Human")
+    selectLevel();
   }
 }
 
 selectLevel();
-console.log(modeSelection)
 
 let playerOne = ""
 let playerTwo = ""
@@ -85,9 +75,9 @@ headOrTail = prompt("Head - 1 or Tail - 2?")
   }
 }
 
+if (modeSelection == 1) {
 selection2();
-
-console.log(`Test: ${headOrTail}`)
+}
 
 let ergebnis = ""
 
@@ -96,18 +86,18 @@ var prob1 = Math.floor(Math.random() * 2) +1;
 var prob2 = Math.floor(Math.random() * 2) +1;
 if( prob1 === prob2) {
   ergebnis = "Tail"
-  return ergebnis
   console.log('You Got TAIL');
+  return ergebnis
 } else {
   ergebnis = "Head"
-  return ergebnis
   console.log('You Got HEAD');
+  return ergebnis
 }
 }
 
+if (modeSelection === 1) {
 whoWillStart();
-
-console.log(`This is a control log to check score of toss ${ergebnis}`)
+}
 
 function checkScoreAndStarter() {
 if (ergebnis == "Tail" && headOrTail == "2" || ergebnis == "Head" && headOrTail == "1") {
@@ -119,13 +109,14 @@ if (ergebnis == "Tail" && headOrTail == "2" || ergebnis == "Head" && headOrTail 
 }
 }
 
-console.log(modeSelection)
-if (modeSelection == "1") {
+if (modeSelection == 1) {
 checkScoreAndStarter ();
 }
 
+if (modeSelection == 1) {
 console.log(startingPlayer)
 console.log(`Player 1 with Symbol X is ${playerOne} and Player 2 with Symbol O is ${playerTwo} and Player ${startingPlayer} will start the game!`)
+}
 
 var defaultConfig = {
   player1:{
@@ -143,11 +134,11 @@ function drawBoard(round, board){
     console.log(" ");
     console.log("---1---2---3---")
     console.log("---------------")
-    console.log('A ' + (board["A1"] || '. ') + " | " + (board["A2"] || ' . ') + " | " + (board["A3"] || ' . '));
+    console.log('A ' + (board["7"] || '. ') + " | " + (board["8"] || ' . ') + " | " + (board["9"] || ' . '));
     console.log("---------------");
-    console.log('B ' + (board["B1"] || '. ') + " | " + (board["B2"] || ' . ') + " | " + (board["B3"] || ' . '));
+    console.log('B ' + (board["4"] || '. ') + " | " + (board["5"] || ' . ') + " | " + (board["6"] || ' . '));
     console.log("---------------");
-    console.log('C ' + (board["C1"] || '. ') + " | " + (board["C2"] || ' . ') + " | " + (board["C3"] || ' . '));
+    console.log('C ' + (board["1"] || '. ') + " | " + (board["2"] || ' . ') + " | " + (board["3"] || ' . '));
     console.log(" ");
     console.groupEnd();
 };
@@ -155,17 +146,44 @@ function drawBoard(round, board){
 function solutions(board) {
   return false
       // horizontal
-      || (board["C1"] && (board["C1"] == board["C2"] && board["C1"] == board["C3"]))
-      || (board["B1"] && (board["B1"] == board["B2"] && board["B1"] == board["B3"]))
-      || (board["A1"] && (board["A1"] == board["A2"] && board["A1"] == board["A3"]))
+      || (board["1"] && (board["1"] == board["2"] && board["1"] == board["3"]))
+      || (board["4"] && (board["4"] == board["5"] && board["4"] == board["6"]))
+      || (board["7"] && (board["7"] == board["8"] && board["7"] == board["9"]))
       // vertical
-      || (board["C1"] && (board["C1"] == board["B1"] && board["C1"] == board["A1"]))
-      || (board["C2"] && (board["C2"] == board["B2"] && board["C2"] == board["A2"]))
-      || (board["C3"] && (board["C3"] == board["B3"] && board["C3"] == board["A3"]))
+      || (board["1"] && (board["1"] == board["4"] && board["1"] == board["7"]))
+      || (board["2"] && (board["2"] == board["5"] && board["2"] == board["8"]))
+      || (board["3"] && (board["3"] == board["6"] && board["3"] == board["9"]))
       // diagonal
-      || (board["C1"] && (board["C1"] == board["B2"] && board["C1"] == board["A3"]))
-      || (board["C3"] && (board["C3"] == board["B2"] && board["C3"] == board["A1"]));
+      || (board["1"] && (board["1"] == board["5"] && board["1"] == board["9"]))
+      || (board["3"] && (board["3"] == board["5"] && board["3"] == board["7"]));
 };
+
+function pc_move(board, playerSymbol, opponentSymbol){
+  let testBoard;
+  // try to finish, then try to block opponent
+  const player = [playerSymbol, opponentSymbol];
+  for (var p = 0 ; p < 2; p++){
+      for (var i = 1 ; i < 10; i++){
+          if(board[i.toString()] !== null){
+            console.log(board[i])
+              continue;
+          }
+          testBoard = Object.assign({}, board);
+          testBoard[i.toString()] = player[p];
+          if(solutions(testBoard)){
+            console.log(board[i])
+              return i.toString();
+          }
+      }
+  }
+
+  // guess any other free field
+  let guess = undefined;
+  while(guess === undefined || board[guess] !== null){
+      guess = Math.floor(Math.random() * 10 + 1).toString();
+  }
+  return guess;
+}
 
 function ttt(config){
   config = Object.assign(defaultConfig, config || {});
@@ -181,16 +199,17 @@ function ttt(config){
         player1Move = false
       }
       board = {
-          "C1" : null,
-          "C2" : null,
-          "C3" : null,
-          "B1" : null,
-          "B2" : null,
-          "B3" : null,
-          "A1" : null,
-          "A2" : null,
-          "A3" : null
+          "1" : null,
+          "2" : null,
+          "3" : null,
+          "4" : null,
+          "5" : null,
+          "6" : null,
+          "7" : null,
+          "8" : null,
+          "9" : null
       };
+      
       if (modeSelection == "2") {
         computer = true
       } else {
@@ -217,7 +236,25 @@ function ttt(config){
                   ask = pc_move(board, currentPlayer.symbol, opponentPlayer.symbol);
               } else {
                   ask = prompt(`${currentPlayer.title} (${currentPlayer.symbol}) where would you like to go (A-C 1-3)? (type "exit" to leave)`);
-                  if(ask == 'exit') {
+                  if (ask === "C1") {
+                    ask = "1"
+                  } else if (ask === "C2") {
+                    ask = "2"
+                  } else if (ask === "C3") {
+                    ask = "3"
+                  } else if (ask === "B1") {
+                    ask = "4"
+                  } else if (ask === "B2") {
+                    ask = "5"
+                  } else if (ask === "B3") {
+                    ask = "6"
+                  } else if (ask === "A1") {
+                    ask = "7"
+                  } else if (ask === "A2") {
+                    ask = "8"
+                  } else if (ask === "A3") {
+                    ask = "9"
+                  } else if(ask == 'exit') {
                       gameOn = false;
                       break;
                   }
@@ -227,6 +264,7 @@ function ttt(config){
               break;
           }
 
+          console.log(ask)
           board[ask] = currentPlayer.symbol;
           player1Move = !player1Move;
           drawBoard(round++, board);
@@ -236,7 +274,7 @@ function ttt(config){
           gameOn = false;
       }
       if(ask !== 'exit' && prompt("Play again? (YES/no)") !== "no"){
-          gameOn = true;
+          selectLevel();
       }
   }
 }
