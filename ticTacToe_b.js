@@ -75,7 +75,7 @@ headOrTail = prompt("Head - 1 or Tail - 2?")
   }
 }
 
-if (modeSelection == 1) {
+if (modeSelection == 1 || modeSelection == 2) {
 selection2();
 }
 
@@ -95,7 +95,7 @@ if( prob1 === prob2) {
 }
 }
 
-if (modeSelection === 1) {
+if (modeSelection === 1 || modeSelection == 2) {
 whoWillStart();
 }
 
@@ -109,13 +109,17 @@ if (ergebnis == "Tail" && headOrTail == "2" || ergebnis == "Head" && headOrTail 
 }
 }
 
-if (modeSelection == 1) {
+if (modeSelection == 1 || modeSelection == 2) {
 checkScoreAndStarter ();
 }
 
 if (modeSelection == 1) {
 console.log(startingPlayer)
 console.log(`Player 1 with Symbol X is ${playerOne} and Player 2 with Symbol O is ${playerTwo} and Player ${startingPlayer} will start the game!`)
+} else if (modeSelection == 2 || startingPlayer == "X") {
+  console.log(`${playerOne} with X plays against AI (O), and ${startingPlayer} will start the game`)
+} else if (modeSelection == 2 || startingPlayer == "O") {
+  console.log(`${playerOne} with X plays against AI (O) and ${startingPlayer} will start the game`)
 }
 
 var defaultConfig = {
@@ -165,13 +169,11 @@ function pc_move(board, playerSymbol, opponentSymbol){
   for (var p = 0 ; p < 2; p++){
       for (var i = 1 ; i < 10; i++){
           if(board[i.toString()] !== null){
-            console.log(board[i])
               continue;
           }
           testBoard = Object.assign({}, board);
           testBoard[i.toString()] = player[p];
           if(solutions(testBoard)){
-            console.log(board[i])
               return i.toString();
           }
       }
