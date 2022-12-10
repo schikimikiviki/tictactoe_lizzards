@@ -88,6 +88,17 @@ var defaultConfig = {
 	},
 };
 console.log("Want to play a game?;)");
+var board = {
+	1: ` `,
+	2: " ",
+	3: " ",
+	4: " ",
+	5: " ",
+	6: " ",
+	7: " ",
+	8: " ",
+	9: " ",
+};
 
 function main(config) {
 	config = Object.assign(defaultConfig, config || {});
@@ -103,15 +114,15 @@ function main(config) {
 		round = 0;
 		player1Move = true;
 		board = {
-			C1: null,
-			C2: null,
-			C3: null,
-			B1: null,
-			B2: null,
-			B3: null,
-			A1: null,
-			A2: null,
-			A3: null,
+			1: null,
+			2: null,
+			3: null,
+			4: null,
+			5: null,
+			6: null,
+			7: null,
+			8: null,
+			9: null,
 		};
 		computer =
 			prompt("Do you want to play with another person? (yes/NO)") !== "yes";

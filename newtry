@@ -25,18 +25,18 @@ class TicTacToe {
 
 	/// update layout
 	updateLayout() {
-		console.log(`   A    B    C`);
-		this.ticTacToeLayout = `1   ${this.displayItem(
+		//console.log(`   A    B    C`);
+		this.ticTacToeLayout = `1-3   ${this.displayItem(
 			this.ticTacToe[0]
 		)} | ${this.displayItem(this.ticTacToe[1])} | ${this.displayItem(
 			this.ticTacToe[2]
 		)}
 ---------------
-2   ${this.displayItem(this.ticTacToe[3])} | ${this.displayItem(
+4-6   ${this.displayItem(this.ticTacToe[3])} | ${this.displayItem(
 			this.ticTacToe[4]
 		)} | ${this.displayItem(this.ticTacToe[5])}
 ---------------
-3   ${this.displayItem(this.ticTacToe[6])} | ${this.displayItem(
+7-9   ${this.displayItem(this.ticTacToe[6])} | ${this.displayItem(
 			this.ticTacToe[7]
 		)} | ${this.displayItem(this.ticTacToe[8])}`;
 	}
@@ -262,6 +262,19 @@ class TicTacToe {
 			console.log(self.ticTacToe[position - 1]);
 			// position occupied
 			self.moveError("Position Occupied!!! ");
+		} else if (
+			(this.ticTacToe[0] &&
+				this.ticTacToe[1] &&
+				this.ticTacToe[2] &&
+				this.ticTacToe[3] &&
+				this.ticTacToe[4] &&
+				this.ticTacToe[5] &&
+				this.ticTacToe[6] &&
+				this.ticTacToe[7] &&
+				this.ticTacToe[8] &&
+				this.ticTacToe[9]) !== undefined
+		) {
+			console.log(`Tie`);
 		} else {
 			// register move
 			self.ticTacToe[position - 1] = self.getCharacter(self.currentPlayer);
@@ -277,7 +290,7 @@ class TicTacToe {
 		console.log(
 			`${arguments[0] ? arguments[0] : ""}Player ${this.displayPlayer(
 				this.currentPlayer
-			)}, Your move! (position[1-9]): `
+			)}, Your move! (position[1-9]) `
 		);
 	}
 

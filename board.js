@@ -1,16 +1,10 @@
 module.exports = {
 	getEmptyBoard: function () {
-		let emptyboard = {
-			1: " ",
-			2: " ",
-			3: " ",
-			4: " ",
-			5: " ",
-			6: " ",
-			7: " ",
-			8: " ",
-			9: " ",
-		};
+		let emptyboard = [
+			[".", ".", "."],
+			[".", ".", "."],
+			[".", ".", "."],
+		];
 
 		return emptyboard;
 	},
@@ -44,45 +38,51 @@ module.exports = {
 	},
 
 	getWinningPlayer: function (board) {
-		var winCombinations = [
-			[1, 2, 3],
-			[4, 5, 6],
-			[7, 8, 9],
-			[1, 4, 7],
-			[2, 5, 8],
-			[3, 6, 9],
-			[1, 5, 9],
-			[3, 5, 7],
+		let player1 = `X`;
+		let player2 = `O`;
+		//let counter1 = 0;
+		//let counter2 = 0;
+		let winner;
+
+		let winCombinations = [
+			[board[0][0], board[0][1], board[0][2]],
+			[board[1][0], board[1][1], board[1][2]],
+			[board[2][0], board[2][1], board[2][2]],
+			[board[0][0], board[1][0], board[2][0]],
+			[board[0][1], board[1][1], board[2][1]],
+			[board[0][2], board[1][2], board[2][2]],
+			[board[0][0], board[1][1], board[2][2]],
+			[board[0][2], board[1][1], board[2][0]],
 		];
 
-		let playerX = `X`;
-		let playerO = `O`;
-		let winningplayer;
-
-		for (var i = 0; i < winCombinations.length; i++) {
-			var markCountX = 0;
-			var markCountO = 0;
-
-			for (var j = 0; j < winCombinations[i].length; j++) {
-				if (board[winCombinations[i][j]] === playerX) {
-					markCountX++;
-
-					if (markCountX === 3) {
-						winningplayer = `X`;
-					}
-				} else if (board[winCombinations[i][j]] === playerO) {
-					markCountO++;
-					if (markCountO === 3) {
-						winningplayer = `O`;
-					}
-				}
+		for (let i = 0; i < winCombinations.length; i++) {
+			if ((winCombinations[i] = [`X`, `X`, `X`])) {
+				winner = player1;
+			} else if ((winCombinations[i] = [`O`, `O`, `O`])) {
+				winner = player2;
+			} else {
+				winner = `None`;
 			}
+
+			// for (let j = 0; j < winCombinations[i].length; j++) {
+			// 	// if (board[winCombinations[i][j]] === player1) {
+			// 	// 	winner = player1;
+			// 	// 	//counter1++;
+			// 	// 	console.log(winner);
+			// 	// } else if (board[winCombinations[i][j]] === player2) {
+			// 	// 	winner = player2;
+			// 	// 	//counter2++;
+			// 	// }
+			// }
 		}
-		console.log(winningplayer);
-		return winningplayer;
+
+		// if (counter1 > counter2) {
+		// 	winner = player1;
+		// }
+
+		return winner;
 	},
 };
-
 // run this function to test whether you have correctly implemented the other function
 function checkBoards() {
 	let board = module.exports.getEmptyBoard();
